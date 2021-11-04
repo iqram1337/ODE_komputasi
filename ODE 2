@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+n = 100
+t = np.linspace(1, 2, n)
+
+T = np.zeros(n)
+T[0] = 0.5
+b = 1
+f = lambda T, t: t*T
+
+for i in range(n-1):
+    h = t[i+1] - t[i]
+    k1 = h*(f(t[i], T[i]))
+    k2 = h*(f(t[i] + b*h, T[i]+k1*b))
+
+    T[i+1] = T[i] + (0.5*k1) + (0.5*k2)
+    print(T[i])
+
+plt.plot(t, T)
+plt.show()
